@@ -1,0 +1,157 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: #000;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #1a1a1a;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    margin-left: 10px;
+}
+
+.menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    background: #1a1a1a;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.menu.active {
+    display: block;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    padding: 10px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.menu a:hover {
+    color: red;
+}
+
+main {
+    margin-top: 0px;
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    flex: 1;
+}
+
+h1, h2 {
+    color: red;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+input, textarea {
+    background: #202020;
+    border: 1px solid red;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+}
+
+button {
+    background: red;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: darkred;
+}
+
+.keyword-box-container {
+    display: block;
+    background: rgb(22, 18, 18);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    white-space: pre-wrap;
+    text-align: left;
+    max-width: 90%;
+    word-wrap: break-word;
+    margin-top: 20px;
+}
+
+#copyBtn {
+    background: linear-gradient(to right, #ffffff, #cccccc);
+    color: rgb(4, 75, 4);
+    font-weight: bold;
+    padding: 8px 15px;
+    cursor: pointer;
+    border: none;
+    margin: 10px auto; 
+    display: block; 
+    text-align: center;
+}
+  
+footer {
+    width: 100%;
+    background: #111;
+    padding: 2px;
+    text-align: center;
+    bottom: 0;
+    position:relative;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: lightgray;
+}
+

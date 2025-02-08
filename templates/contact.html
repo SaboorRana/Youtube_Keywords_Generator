@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Youtube Keyword Generator</title>
+  <style>
+    /* Base Typography & Layout */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #000;
+      color: white;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    main h1, main h2, main h3 {
+      margin-top: 1em;
+    }
+    main p, main li {
+      line-height: 1.6;
+      margin-bottom: 1em;
+    }
+    main section {
+      margin-bottom: 2em;
+      text-align: left;
+    }
+    main ul {
+      margin-left: 20px;
+    }
+    /* Header Styles */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #1a1a1a;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+    }
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+      margin-left: 10px;
+    }
+    .menu {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 10px;
+      background: #1a1a1a;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .menu.active {
+      display: block;
+    }
+    .menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .menu li {
+      padding: 10px;
+    }
+    .menu a {
+      text-decoration: none;
+      color: white;
+      display: block;
+    }
+    .menu a:hover {
+      color: red;
+    }
+    /* Main Content */
+    main {
+      margin-top: 80px; /* Prevent overlap with fixed header */
+      padding: 20px;
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1, h2 {
+      color: red;
+    }
+    /* Footer Styles */
+    footer {
+      width: 100%;
+      background: #111;
+      padding: 10px;
+      text-align: center;
+      bottom: 0;
+      position:relative;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      color: lightgray;
+    }
+
+    /* Contact Form Styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    form label {
+      font-size: 1.1em;
+      margin-bottom: 5px;
+    }
+    form input, form textarea, form button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: #222;
+      color: white;
+    }
+    form textarea {
+      height: 150px;
+    }
+    form button {
+      background-color: red;
+      color: white;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+    form button:hover {
+      background-color: darkred;
+    }
+    .note {
+      font-size: 0.9em;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <nav class="menu" id="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('blog') }}">Blogs</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <h1>Contact Us</h1>
+    <form id="contactForm" action="/send-message" method="post" enctype="multipart/form-data">
+      <label for="name">Your Name *</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required autocomplete="off">
+      
+      <label for="email">Your Email *</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="off">
+      
+      <label for="subject">Subject *</label>
+      <input type="text" id="subject" name="subject" placeholder="Enter subject" required autocomplete="off">
+      
+      <label for="message">Message *</label>
+      <textarea id="message" name="message" placeholder="Enter your message" required autocomplete="off"></textarea>
+      
+      <label for="attachment">Attachments</label>
+      <input type="file" id="attachment" name="attachment" accept=".csv,.jpg,.jpeg,.pdf,.png,.txt,.xls,.xlsx" autocomplete="off">
+      <span class="note">No file chosen. Maximum size is 2MB. Only supporting csv, jpg, pdf, png, txt, xls, xlsx.</span>
+      
+      <button type="submit">Send Message</button>
+    </form>
+  </main>
+  
+  <footer>
+    <div class="footer-links">
+      <a href="{{ url_for('about_us') }}">About Us</a>
+      <a href="{{ url_for('terms_of_service') }}">Terms of Service</a>
+      <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
+    </div>
+    <p>&copy; 2025 All rights reserved.</p>
+  </footer>
+    
+  <script>
+    function toggleMenu() {
+        let menu = document.getElementById("menu");
+        menu.classList.toggle("active")
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+

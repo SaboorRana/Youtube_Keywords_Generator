@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service - Youtube Keyword Generator</title>
+  <style>
+    /* Base Typography & Layout */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #000;
+      color: white;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    main h1, main h2, main h3 {
+      margin-top: 1em;
+    }
+    main p, main li {
+      line-height: 1.6;
+      margin-bottom: 1em;
+    }
+    main section {
+      margin-bottom: 2em;
+      text-align: left;
+    }
+    main ul {
+      margin-left: 20px;
+    }
+    /* Header Styles */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #1a1a1a;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+    }
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+      margin-left: 10px;
+    }
+    .menu {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 10px;
+      background: #1a1a1a;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .menu.active {
+      display: block;
+    }
+    .menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .menu li {
+      padding: 10px;
+    }
+    .menu a {
+      text-decoration: none;
+      color: white;
+      display: block;
+    }
+    .menu a:hover {
+      color: red;
+    }
+    /* Main Content */
+    main {
+      margin-top: 80px; /* Prevent overlap with fixed header */
+      padding: 20px;
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1, h2 {
+      color: red;
+    }
+    /* Footer Styles */
+    footer {
+      width: 100%;
+      background: #111;
+      padding: 10px;
+      text-align: center;
+      bottom: 0;
+      position:relative;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      color: lightgray;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <nav class="menu" id="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('blog') }}">Blogs</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+  
+  <main>
+    <h1>Terms of Service</h1>
+    
+    <section id="acceptance">
+      <h2>Acceptance of Terms</h2>
+      <p>
+        Welcome to Youtube Keyword Generator. By using our free Service, you agree that you have read, understand,
+        and accept these Terms of Service (the "Terms"). If you do not agree to these Terms, please do not use our Service.
+      </p>
+    </section>
+    
+    <section id="communications">
+      <h2>Communications</h2>
+      <p>
+        By using our Service, you may receive communications such as newsletters or promotional emails. If you prefer not to receive these messages,
+        you may opt out by following the unsubscribe link provided in the emails or by contacting us directly.
+      </p>
+    </section>
+    
+    <section id="content">
+      <h2>Content</h2>
+      <p>
+        Our Service allows you to post, link, store, share, and otherwise make available certain information, text, graphics, videos, or other materials ("Content").
+        You are solely responsible for any Content you post. By posting Content, you warrant that you have the right to do so and that the Content does not infringe
+        on any third-party rights. While you retain ownership of your Content, you grant us a worldwide, non-exclusive, royalty-free license to use, modify,
+        reproduce, and distribute your Content as part of our Service.
+      </p>
+    </section>
+    
+    <section id="prohibited-uses">
+      <h2>Prohibited Uses</h2>
+      <p>
+        You agree to use our Service only for lawful purposes and in accordance with these Terms. You agree not to:
+      </p>
+      <ul>
+        <li>Violate any applicable laws or regulations.</li>
+        <li>Exploit or harm minors in any way.</li>
+        <li>Transmit any spam or unsolicited promotional material.</li>
+        <li>Impersonate any person or entity or misrepresent your affiliation with any person or entity.</li>
+        <li>Engage in any conduct that restricts or inhibits anyone's use or enjoyment of the Service.</li>
+        <li>Introduce any malicious software or attempt to gain unauthorized access to our systems.</li>
+      </ul>
+    </section>
+    
+    <section id="fair-usage">
+      <h2>Fair Usage</h2>
+      <p>
+        To ensure quality Service for all users, you agree to use our Service in a fair manner. Any behavior that disrupts the experience for others or harms our infrastructure
+        may result in termination of your access.
+      </p>
+    </section>
+    
+    <section id="minors">
+      <h2>No Use by Minors</h2>
+      <p>
+        Our Service is intended for use by individuals who are at least 18 years old. By accessing or using our Service, you warrant that you are at least 18 years of age.
+      </p>
+    </section>
+    
+    <section id="accounts">
+      <h2>Accounts</h2>
+      <p>
+        If you create an account with our Service, you agree to provide accurate, complete, and current information. You are responsible for maintaining the confidentiality
+        of your account and password, and for all activities that occur under your account. Please notify us immediately if you suspect any unauthorized use of your account.
+      </p>
+    </section>
+    
+    <section id="intellectual-property">
+      <h2>Intellectual Property</h2>
+      <p>
+        All original content provided through our Service, excluding user-generated Content, is the property of Youtube Keyword Generator or its licensors.
+        You may not use our trademarks or any of our copyrighted material without our prior written consent.
+      </p>
+    </section>
+    
+    <section id="feedback">
+      <h2>Error Reporting and Feedback</h2>
+      <p>
+        We welcome your feedback and suggestions to improve our Service. If you send us feedback, you agree that we may use it without any restriction or compensation to you.
+      </p>
+    </section>
+    
+    <section id="external-links">
+      <h2>Links to Other Websites</h2>
+      <p>
+        Our Service may contain links to third-party websites. We have no control over the content or practices of these sites and are not responsible for their terms or policies.
+        You access these links at your own risk.
+      </p>
+    </section>
+    
+    <section id="disclaimer">
+      <h2>Disclaimer of Warranty</h2>
+      <p>
+        Our Service is provided on an "as is" and "as available" basis. We make no warranties, express or implied, regarding the reliability, quality, or availability
+        of the Service. Your use of the Service is at your sole risk.
+      </p>
+    </section>
+    
+    <section id="limitation">
+      <h2>Limitation of Liability</h2>
+      <p>
+        To the fullest extent permitted by law, Youtube Keyword Generator and its affiliates, directors, employees, and agents shall not be liable for any indirect,
+        incidental, or consequential damages arising from your use of the Service.
+      </p>
+    </section>
+    
+    <section id="termination">
+      <h2>Termination</h2>
+      <p>
+        We reserve the right to terminate or suspend your access to our Service at any time, without prior notice, for conduct that we believe violates these Terms
+        or is harmful to other users or our business interests.
+      </p>
+    </section>
+    
+    <section id="governing-law">
+      <h2>Governing Law</h2>
+      <p>
+        These Terms shall be governed and construed in accordance with the laws applicable to our Service. Any disputes arising from these Terms will be subject to the exclusive
+        jurisdiction of the relevant courts.
+      </p>
+    </section>
+    
+    <section id="changes">
+      <h2>Changes to the Terms of Service</h2>
+      <p>
+        We may update these Terms from time to time by posting the revised version on our website. Your continued use of the Service after the changes become effective constitutes
+        your acceptance of the updated Terms. Please review this page periodically for any changes.
+      </p>
+    </section>
+    
+    <section id="waiver-severability">
+      <h2>Waiver and Severability</h2>
+      <p>
+        No waiver of any provision of these Terms shall be deemed a further or continuing waiver of such provision or any other provision. If any part of these Terms is found to be
+        invalid or unenforceable, that part shall be interpreted to reflect the parties’ original intent, and the remaining portions will remain in full force and effect.
+      </p>
+    </section>
+    
+    <section id="acknowledgement">
+      <h2>Acknowledgement</h2>
+      <p>
+        By using our Service, you acknowledge that you have read and understood these Terms of Service and agree to be bound by them.
+      </p>
+    </section>
+    
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>
+        If you have any questions about these Terms, please contact us at:
+      </p>
+      <p>Email: <a href="masaboor9@gmail.com" style="color: red;">masaboor9@gmail.com</a></p>
+    </section>
+  </main>
+  
+  <footer>
+    <div class="footer-links">
+      <a href="{{ url_for('about_us') }}">About Us</a>
+      <a href="{{ url_for('terms_of_service') }}">Terms of Service</a>
+      <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
+  </div>
+    <p>&copy; 2025 All rights reserved.</p>
+  </footer>
+  
+  <script>
+    function toggleMenu() {
+        let menu = document.getElementById("menu");
+        menu.classList.toggle("active")
+    }
+  </script>
+</body>
+</html>

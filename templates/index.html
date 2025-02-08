@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100% FREE - No Signup required - YouTube Keyword Generator - Boost your YouTube video rankings with the best keyword generator! Find relevant keywords for higher views & engagement - Youtube Keyword Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="description" content="Generate the best YouTube keywords for free! No signup required. Boost your YouTube video rankings with relevant keywords.">
+</head>
+<body>
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <nav class="menu" id="menu">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+                <li><a href="{{ url_for('blog') }}">Blogs</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h1>Youtube Keyword Generator</h1>
+        <h3>Boost Your YouTube Channel with Perfect Keywords!</h3>
+        <h5>Unlock free, easy-to-use tools to discover the best keywords for your videos. Drive more views, engagement, and success with YouTube Keyword Generator.</h5>
+        <form id="keywordForm">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter video title" autocomplete="off">     
+            <label for="description">Description: (Optional)</label>
+            <textarea id="description" name="description" placeholder="Enter video description" autocomplete="off"></textarea>
+            <button type="submit" id="generateBtn" disabled>Generate Keywords</button>
+        </form>
+        
+        <h2 id="generatedHeading" style="display: none;">Generated Best Relevant Keywords</h2>
+        <div id="keywordContainer" class="keyword-box-container" style="display: none;"></div>
+        <button id="copyBtn" style="display: none;">Copy Keywords</button>
+    </main>
+    
+    <footer>
+        <div class="footer-links">
+            <a href="{{ url_for('about_us') }}">About Us</a>
+            <a href="{{ url_for('terms_of_service') }}">Terms of Service</a>
+            <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </div>
+        <p>&copy; 2025 All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            let menu = document.getElementById("menu");
+            menu.classList.toggle("active");
+        }
+
+        document.getElementById("title").addEventListener("input", function() {
+            let generateBtn = document.getElementById("generateBtn");
+            if (this.value.trim() !== "") {
+                generateBtn.disabled = false;
+            } else {
+                generateBtn.disabled = true;
+            }
+        });
+
+        document.getElementById("keywordForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let title = document.getElementById("title").value;
+            let description = document.getElementById("description").value;
+            
+            fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title: title, description: description })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let keywordContainer = document.getElementById("keywordContainer");
+                let generatedHeading = document.getElementById("generatedHeading");
+                let copyBtn = document.getElementById("copyBtn");
+
+                keywordContainer.style.display = "block";
+                generatedHeading.style.display = "block";
+                copyBtn.style.display = "block";
+                
+                keywordContainer.innerHTML = data.keywords.join(", ");
+            });
+        });
+
+        document.getElementById("copyBtn").addEventListener("click", function() {
+            let text = document.getElementById("keywordContainer").innerText;
+            navigator.clipboard.writeText(text);
+            alert("Keywords copied!");
+        });
+    </script>
+</body>
+</html> 

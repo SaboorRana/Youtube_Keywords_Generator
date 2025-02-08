@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Youtube Keyword Generator</title>
+  <style>
+    /* Base Typography & Layout */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #000;
+      color: white;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    main h1, main h2, main h3 {
+      margin-top: 1em;
+    }
+    main p, main li {
+      line-height: 1.6;
+      margin-bottom: 1em;
+    }
+    main section {
+      margin-bottom: 2em;
+      text-align: left;
+    }
+    main ul {
+      margin-left: 20px;
+    }
+    /* Header Styles */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #1a1a1a;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+    }
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+      margin-left: 10px;
+    }
+    .menu {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 10px;
+      background: #1a1a1a;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .menu.active {
+      display: block;
+    }
+    .menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .menu li {
+      padding: 10px;
+    }
+    .menu a {
+      text-decoration: none;
+      color: white;
+      display: block;
+    }
+    .menu a:hover {
+      color: red;
+    }
+    /* Main Content */
+    main {
+      margin-top: 80px; /* Prevent overlap with fixed header */
+      padding: 20px;
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1, h2 {
+      color: red;
+    }
+    /* Footer Styles */
+    footer {
+      width: 100%;
+      background: #111;
+      padding: 10px;
+      text-align: center;
+      bottom: 0;
+      position:relative;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      color: lightgray;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <nav class="menu" id="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('blog') }}">Blogs</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+  
+  <main>
+    <h1>Privacy Policy</h1>
+    
+    <section id="introduction">
+      <h2>Introduction</h2>
+      <p>
+        Welcome to Youtube Keyword Generator, your trusted online tool for generating video keywords.
+        This Privacy Policy explains how we collect, use, safeguard, and disclose your information when you visit our website (the "Service").
+      </p>
+      <p>
+        By accessing and using our Service, you agree to the collection and use of information in accordance with this Privacy Policy.
+      </p>
+    </section>
+    
+    <section id="definitions">
+      <h2>Definitions</h2>
+      <ul>
+        <li><strong>Service:</strong> Refers to the Youtube Keyword Generator website and related services.</li>
+        <li><strong>Personal Data:</strong> Any information that can identify an individual.</li>
+        <li><strong>Usage Data:</strong> Automatically collected data such as your IP address, browser type, pages visited, and the duration of your visit.</li>
+        <li><strong>Cookies:</strong> Small data files stored on your device that help enhance your experience.</li>
+      </ul>
+    </section>
+    
+    <section id="information-collection">
+      <h2>Information Collection and Use</h2>
+      <p>
+        We collect various types of information to provide and improve our Service.
+      </p>
+      <h3>Types of Data Collected</h3>
+      <h4>Personal Data</h4>
+      <p>
+        When you use our Service, we may ask you to provide personally identifiable information such as your name and email address.
+        This data is used to contact you and improve your experience.
+      </p>
+      <h4>Usage Data</h4>
+      <p>
+        We automatically collect information from your browser each time you visit our Service. This data may include your IP address, browser type,
+        device information, pages visited, and the duration of your visit.
+      </p>
+      <h4>Cookies and Tracking Technologies</h4>
+      <p>
+        We use cookies and similar tracking technologies to track your activity on our Service. Cookies help us remember your preferences and provide a more personalized experience.
+        You can instruct your browser to refuse cookies, but some parts of our Service may not function properly.
+      </p>
+    </section>
+    
+    <section id="use-of-data">
+      <h2>Use of Data</h2>
+      <p>
+        Youtube Keyword Generator uses the collected data for several purposes:
+      </p>
+      <ul>
+        <li>Providing and maintaining our Service.</li>
+        <li>Notifying you about changes or updates to our Service.</li>
+        <li>Enhancing user experience and support.</li>
+        <li>Analyzing usage patterns to improve our offerings.</li>
+        <li>Detecting and preventing technical issues.</li>
+      </ul>
+    </section>
+    
+    <section id="data-retention">
+      <h2>Retention of Data</h2>
+      <p>
+        We retain your Personal Data only for as long as necessary to fulfill the purposes described in this Privacy Policy.
+        Usage Data is retained for a shorter period unless it is required for security or legal reasons.
+      </p>
+    </section>
+    
+    <section id="data-transfer">
+      <h2>Transfer of Data</h2>
+      <p>
+        Your information, including Personal Data, may be transferred and maintained on servers located outside your jurisdiction.
+        We ensure that any transfer of your data complies with applicable data protection laws.
+      </p>
+    </section>
+    
+    <section id="data-disclosure">
+      <h2>Disclosure of Data</h2>
+      <p>
+        We may disclose your Personal Data under the following circumstances:
+      </p>
+      <ul>
+        <li><strong>For Law Enforcement:</strong> When required by law or in response to legal requests.</li>
+        <li><strong>Business Transactions:</strong> In connection with mergers, acquisitions, or asset sales.</li>
+        <li><strong>With Service Providers:</strong> To trusted partners who assist in operating our Service, under confidentiality obligations.</li>
+      </ul>
+    </section>
+    
+    <section id="data-security">
+      <h2>Security of Data</h2>
+      <p>
+        We take reasonable measures to protect your Personal Data, but no method of transmission or storage is 100% secure.
+        While we strive to protect your data, we cannot guarantee its absolute security.
+      </p>
+    </section>
+    
+    <section id="user-rights">
+      <h2>Your Data Protection Rights</h2>
+      <p>
+        Depending on your location, you may have certain rights regarding your Personal Data, including:
+      </p>
+      <ul>
+        <li>The right to access, update, or delete your personal information.</li>
+        <li>The right to restrict or object to our processing of your data.</li>
+        <li>The right to data portability.</li>
+        <li>The right to withdraw consent at any time.</li>
+      </ul>
+      <p>
+        To exercise these rights, please contact us using the information provided in the Contact section.
+      </p>
+    </section>
+    
+    <section id="third-party-services">
+      <h2>Third-Party Services</h2>
+      <p>
+        We may use third-party companies and individuals to facilitate our Service. These third parties have access to your data only to perform specific tasks on our behalf and are required to keep your information confidential.
+      </p>
+    </section>
+    
+    <section id="analytics-and-payments">
+      <h2>Analytics and Payments</h2>
+      <h3>Analytics</h3>
+      <p>
+        We may employ third-party analytics services to monitor and analyze the usage of our Service. These services help us improve our offerings by providing insights into user behavior.
+      </p>
+      <h3>Payments</h3>
+      <p>
+        For any paid services, we use third-party payment processors. We do not store your payment details; they are handled securely by our payment partners in accordance with industry standards.
+      </p>
+    </section>
+    
+    <section id="external-links">
+      <h2>Links to Other Sites</h2>
+      <p>
+        Our Service may contain links to external websites that are not operated by us. We recommend reviewing the privacy policies of those sites as we do not control their content or practices.
+      </p>
+    </section>
+    
+    <section id="childrens-privacy">
+      <h2>Children's Privacy</h2>
+      <p>
+        Our Service is not intended for individuals under the age of 18. We do not knowingly collect personally identifiable information from children.
+        If you believe that we have inadvertently collected such information, please contact us immediately.
+      </p>
+    </section>
+    
+    <section id="policy-updates">
+      <h2>Changes to This Privacy Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. When we do, we will update the "effective date" at the top of the page and provide notice on our Service, as appropriate.
+        We encourage you to review this Privacy Policy periodically.
+      </p>
+    </section>
+    
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>
+        If you have any questions or concerns about this Privacy Policy, please contact us:
+      </p>
+      <p>Email: <a href="masaboor9@gmail.com" style="color: red;">masaboor9@gmail.com</a></p>
+      <p>You can also reach us through our contact page on the website.</p>
+    </section>
+  </main>
+  
+  <footer>
+    <div class="footer-links">
+      <a href="{{ url_for('about_us') }}">About Us</a>
+      <a href="{{ url_for('terms_of_service') }}">Terms of Service</a>
+      <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
+  </div>
+    <p>&copy; 2025 All rights reserved.</p>
+  </footer>
+  
+  <script>
+    function toggleMenu() {
+        let menu = document.getElementById("menu");
+        menu.classList.toggle("active")
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
