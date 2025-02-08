@@ -1,16 +1,16 @@
 {
-    "version": 2,  // "version" key defines the Vercel platform version to use
+    "version": 2, 
     "builds": [
       { 
-        "src": "app.py",  // "src" key specifies the main script (entry point) for your Python app
-        "use": "@vercel/python"  // "use" key tells Vercel to deploy using the Python runtime
+        "src": "app.py",  
+        "use": "@vercel/python" 
       }
     ],
     "routes": [
       { 
-        "src": "/(.*)",  // "src" key defines a URL pattern (matches all requests)
-        "dest": "app.py"  // "dest" key tells Vercel to send requests to "app.py"
-      }
+        "src": "/(.*)",  
+        "dest": "app.py" 
+    } 
     ]
   }
   
