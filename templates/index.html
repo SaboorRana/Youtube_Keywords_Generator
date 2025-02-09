@@ -69,7 +69,7 @@
             let title = document.getElementById("title").value;
             let description = document.getElementById("description").value;
             
-            fetch("https://youtube-keywords-generator-3z4qtq0cm.vercel.app/", {
+            fetch("https://youtube-keywords-generator-3z4qtq0cm.vercel.app/generate-keywords", {  // Add the correct endpoint
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title: title, description: description })
@@ -95,6 +95,7 @@
     console.error("Error:", error);
     alert("Failed to fetch keywords. Please try again.");
 });
+
             // fetch("/", {
             //     method: "POST",
             //     headers: { "Content-Type": "application/json" },
