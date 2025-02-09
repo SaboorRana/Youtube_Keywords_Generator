@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from flask import jsonify 
 import yake
 import requests
 import nltk
@@ -93,10 +94,10 @@ def generate_keywords(title, description=""):
 
     return structured_keywords
 
+app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def index():
     keywords = []
-
     if request.method == "POST":
         data = request.get_json()
         title = data.get("title", "")
@@ -105,7 +106,6 @@ def index():
         if title:
             generated_keywords = generate_keywords(title, description)
             return {"keywords": generated_keywords[:30]}  # Return JSON
-
     return render_template("index.html", keywords=keywords)
 @app.route("/about_us")
 def about_us():
