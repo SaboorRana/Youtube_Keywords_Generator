@@ -8,6 +8,7 @@ from nltk.corpus import stopwords, wordnet
 from bs4 import BeautifulSoup
 from itertools import permutations
 import os
+from flask_cors import CORS
 
 
 nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
@@ -96,6 +97,7 @@ def generate_keywords(title, description=""):
 
 from flask import Flask
 app = Flask(__name__)
+CORS(app)
 @app.route("/", methods=["GET", "POST"])
 def home():
     print("Received Request:", request.method)
