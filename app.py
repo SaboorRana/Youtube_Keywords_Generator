@@ -98,6 +98,7 @@ from flask import Flask
 app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def home():
+    print("Received Request:", request.method)
     keywords = []
     if request.method == "POST":
         data = request.get_json()
@@ -123,6 +124,13 @@ def privacy_policy():
 @app.route("/terms_of_service")
 def terms_of_service():
     return render_template("terms_of_service.html")
+from flask import send_from_directory
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+@app.route('/favicon.png')
+def favicon_png():
+    return send_from_directory('static', 'favicon.png', mimetype='image/png')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=5000)
