@@ -6,8 +6,12 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords, wordnet
 from bs4 import BeautifulSoup
 from itertools import permutations
+import os
 
-nltk.download("punkt")
+
+nltk.download('punkt', download_dir='nltk_data')
+nltk.data.path.append(os.path.join(os.path.dirname(__file__), "nltk_data"))
+from nltk.tokenize import word_tokenize
 nltk.download("stopwords")
 nltk.download("wordnet")
 
@@ -17,17 +21,10 @@ def fetch_related_searches(query):
     """Fetches related search terms from Google/Bing"""
     try:
         url = f"https://www.google.com/search?q={query}"
-        response = requests.get(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"})
-        response.raise_for_status()  # Raise HTTP errors
+        response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
         soup = BeautifulSoup(response.text, "html.parser")
         suggestions = [s.text for s in soup.find_all("p") if len(s.text.split()) > 2][:10]  # Extract meaningful phrases
         return suggestions
-    # try:
-    #     url = f"https://www.google.com/search?q={query}"
-    #     response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
-    #     soup = BeautifulSoup(response.text, "html.parser")
-    #     suggestions = [s.text for s in soup.find_all("p") if len(s.text.split()) > 2][:10]  # Extract meaningful phrases
-    #     return suggestions
     except Exception:
         return []
 
