@@ -94,9 +94,10 @@ def generate_keywords(title, description=""):
 
     return structured_keywords
 
+from flask import Flask
 app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
-def index():
+def home():
     keywords = []
     if request.method == "POST":
         data = request.get_json()
