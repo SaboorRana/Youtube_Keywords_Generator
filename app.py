@@ -10,12 +10,12 @@ import os
 
 
 nltk.download('punkt', download_dir='nltk_data')
-nltk.data.path.append(os.path.join(os.path.dirname(__file__), "nltk_data"))
-from nltk.tokenize import word_tokenize
 nltk.download("stopwords")
 nltk.download("wordnet")
-
-app = Flask(__name__)
+nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
+nltk.data.path.append(nltk_data_path)
+if not os.path.exists(nltk_data_path):
+    raise Exception("NLTK data not found. Please ensure the 'nltk_data' folder is in your project directory.")
 
 def fetch_related_searches(query):
     """Fetches related search terms from Google/Bing"""
