@@ -9,6 +9,8 @@ from bs4 import BeautifulSoup
 from itertools import permutations
 import os
 from flask_cors import CORS
+from dotenv import load_dotenv
+load_dotenv()
 
 
 nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
@@ -163,4 +165,5 @@ def favicon_png():
     return send_from_directory('static', 'favicon.png', mimetype='image/png')
 
 if __name__ == "__main__":
-    app.run(port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(port=port, host="0.0.0.0")
