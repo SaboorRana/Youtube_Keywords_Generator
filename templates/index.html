@@ -69,50 +69,52 @@
             let title = document.getElementById("title").value;
             let description = document.getElementById("description").value;
             
-            fetch("https://youtube-keywords-generator-3z4qtq0cm.vercel.app/generate-keywords", {  // Add the correct endpoint
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title: title, description: description })
-})
-.then(response => {
-    if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
-    }
-    return response.json();
-})
-.then(data => {
-    let keywordContainer = document.getElementById("keywordContainer");
-    let generatedHeading = document.getElementById("generatedHeading");
-    let copyBtn = document.getElementById("copyBtn");
+            
+            // fetch("https://youtube-keywords-generator-3z4qtq0cm.vercel.app/generate-keywords", {  // Add the correct endpoint
+//     fetch("http://127.0.0.1:5000/",{
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ title: title, description: description })
+// })
+// .then(response => {
+//     if (!response.ok) {
+//         throw new Error(`Server error: ${response.status}`);
+//     }
+//     return response.json();
+// })
+// .then(data => {
+//     let keywordContainer = document.getElementById("keywordContainer");
+//     let generatedHeading = document.getElementById("generatedHeading");
+//     let copyBtn = document.getElementById("copyBtn");
 
-    keywordContainer.style.display = "block";
-    generatedHeading.style.display = "block";
-    copyBtn.style.display = "block";
+//     keywordContainer.style.display = "block";
+//     generatedHeading.style.display = "block";
+//     copyBtn.style.display = "block";
 
-    keywordContainer.innerHTML = data.keywords.join(", ");
-})
-.catch(error => {
-    console.error("Error:", error);
-    alert("Failed to fetch keywords. Please try again.");
-});
+//     keywordContainer.innerHTML = data.keywords.join(", ");
+// })
+// .catch(error => {
+//     console.error("Error:", error);
+//     alert("Failed to fetch keywords. Please try again.");
+// });
 
-            // fetch("/", {
-            //     method: "POST",
-            //     headers: { "Content-Type": "application/json" },
-            //     body: JSON.stringify({ title: title, description: description })
-            // })
-            // .then(response => response.json())
-            // .then(data => {
-            //     let keywordContainer = document.getElementById("keywordContainer");
-            //     let generatedHeading = document.getElementById("generatedHeading");
-            //     let copyBtn = document.getElementById("copyBtn");
+            fetch("https://youtube-keywords-generator-3z4qtq0cm.vercel.app/generate-keywords", {  // Use the full local URL
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title: title, description: description })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let keywordContainer = document.getElementById("keywordContainer");
+                let generatedHeading = document.getElementById("generatedHeading");
+                let copyBtn = document.getElementById("copyBtn");
 
-            //     keywordContainer.style.display = "block";
-            //     generatedHeading.style.display = "block";
-            //     copyBtn.style.display = "block";
+                keywordContainer.style.display = "block";
+                generatedHeading.style.display = "block";
+                copyBtn.style.display = "block";
                 
-            //     keywordContainer.innerHTML = data.keywords.join(", ");
-            // });
+                keywordContainer.innerHTML = data.keywords.join(", ");
+            });
         });
 
         document.getElementById("copyBtn").addEventListener("click", function() {

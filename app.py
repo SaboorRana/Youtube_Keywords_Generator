@@ -98,44 +98,47 @@ def generate_keywords(title, description=""):
 from flask import Flask
 app = Flask(__name__)
 CORS(app)
-@app.route("/", methods=["GET", "POST"])
-def home():
-    print("Received Request:", request.method)
-    
-    if request.method == "POST":
-        try:
-            data = request.get_json()
-            print("Received Data:", data)  # Debugging log
-            
-            title = data.get("title", "")
-            description = data.get("description", "")
-
-            if title:
-                generated_keywords = generate_keywords(title, description)
-                print("Generated Keywords:", generated_keywords[:30])  # Debugging log
-                return {"keywords": generated_keywords[:30]}  # Return JSON
-            
-            return {"error": "Missing title"}, 400
-        
-        except Exception as e:
-            print("Error in POST request:", e)
-            return {"error": "Server error"}, 500  # Better error handling
-
-    return render_template("index.html", keywords=[])
-
 # @app.route("/", methods=["GET", "POST"])
 # def home():
 #     print("Received Request:", request.method)
-#     keywords = []
+    
 #     if request.method == "POST":
-#         data = request.get_json()
-#         title = data.get("title", "")
-#         description = data.get("description", "")
+#         try:
+#             data = request.get_json()
+#             print("Received Data:", data)  # Print request data
 
-#         if title:
+#             title = data.get("title", "")
+#             description = data.get("description", "")
+
+#             if not title:
+#                 print("⚠️ Missing title!")
+#                 return {"error": "Missing title"}, 400
+
 #             generated_keywords = generate_keywords(title, description)
-#             return {"keywords": generated_keywords[:30]}  # Return JSON
-#     return render_template("index.html", keywords=keywords)
+#             print("Generated Keywords:", generated_keywords[:30])  # Print output
+
+#             return {"keywords": generated_keywords[:30]}  
+
+#         except Exception as e:
+#             print("❌ Error in POST request:", e)
+#             return {"error": "Server error"}, 500  
+
+#     return render_template("index.html")
+
+
+@app.route("/", methods=["GET", "POST"])
+def home():
+    print("Received Request:", request.method)
+    keywords = []
+    if request.method == "POST":
+        data = request.get_json()
+        title = data.get("title", "")
+        description = data.get("description", "")
+
+        if title:
+            generated_keywords = generate_keywords(title, description)
+            return {"keywords": generated_keywords[:30]}  # Return JSON
+    return render_template("index.html", keywords=keywords)
 @app.route("/about_us")
 def about_us():
     return render_template("about_us.html")
