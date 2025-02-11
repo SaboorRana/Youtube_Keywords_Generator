@@ -98,7 +98,7 @@
 //     alert("Failed to fetch keywords. Please try again.");
 // });
 
-            fetch("https://youtube-keywords-generator-3z4qtq0cm.vercel.app/generate-keywords", {  // Use the full local URL
+            fetch("https://youtube-keywords-generator-3z4qtq0cm.vercel.app", {  // Use the full local URL
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ title: title, description: description })
