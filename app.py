@@ -21,12 +21,14 @@ def fetch_related_searches(query):
     try:
         url = f"https://www.google.com/search?q={query}"
         response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
+        response = requests.get(url, timeout=10)
         soup = BeautifulSoup(response.text, "html.parser")
         suggestions = [s.text for s in soup.find_all("p") if len(s.text.split()) > 2][:10]  # Extract meaningful phrases
         return suggestions
-    except Exception:
+    # except Exception:
+    #     return []
+    except (requests.exceptions.Timeout, requests.exceptions.RequestException):
         return []
-
 def get_relevant_synonyms(word):
     """Fetch synonyms while avoiding irrelevant words"""
     synonyms = set()
@@ -130,17 +132,34 @@ CORS(app)
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    print("Received Request:", request.method)
     keywords = []
     if request.method == "POST":
-        data = request.get_json()
-        title = data.get("title", "")
-        description = data.get("description", "")
+        try:
+            data = request.get_json()
+            if not data:
+                return jsonify({"error": "No data received"}), 400
+                
+            title = data.get("title", "")
+            if not title:
+                return jsonify({"error": "Title is required"}), 400
 
-        if title:
-            generated_keywords = generate_keywords(title, description)
-            return {"keywords": generated_keywords[:30]}  # Return JSON
+            generated_keywords = generate_keywords(title, data.get("description", ""))
+            return jsonify({"keywords": generated_keywords[:30]})
+        except Exception as e:
+            print(f"Error: {str(e)}")
+            return jsonify({"error": "Processing failed"}), 500
     return render_template("index.html", keywords=keywords)
+    # print("Received Request:", request.method)
+    # keywords = []
+    # if request.method == "POST":
+    #     data = request.get_json()
+    #     title = data.get("title", "")
+    #     description = data.get("description", "")
+
+    #     if title:
+    #         generated_keywords = generate_keywords(title, description)
+    #         return {"keywords": generated_keywords[:30]}  # Return JSON
+    # return render_template("index.html", keywords=keywords)
 @app.route("/about_us")
 def about_us():
     return render_template("about_us.html")
