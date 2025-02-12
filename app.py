@@ -9,8 +9,8 @@ from bs4 import BeautifulSoup
 from itertools import permutations
 import os
 from flask_cors import CORS
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 
 nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
@@ -26,6 +26,7 @@ def fetch_related_searches(query):
         return suggestions
     except Exception:
         return []
+
 def get_relevant_synonyms(word):
     """Fetch synonyms while avoiding irrelevant words"""
     synonyms = set()
@@ -99,32 +100,6 @@ def generate_keywords(title, description=""):
 from flask import Flask
 app = Flask(__name__)
 CORS(app)
-# @app.route("/", methods=["GET", "POST"])
-# def home():
-#     print("Received Request:", request.method)
-    
-#     if request.method == "POST":
-#         try:
-#             data = request.get_json()
-#             print("Received Data:", data)  # Print request data
-
-#             title = data.get("title", "")
-#             description = data.get("description", "")
-
-#             if not title:
-#                 print("⚠️ Missing title!")
-#                 return {"error": "Missing title"}, 400
-
-#             generated_keywords = generate_keywords(title, description)
-#             print("Generated Keywords:", generated_keywords[:30])  # Print output
-
-#             return {"keywords": generated_keywords[:30]}  
-
-#         except Exception as e:
-#             print("❌ Error in POST request:", e)
-#             return {"error": "Server error"}, 500  
-
-#     return render_template("index.html")
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -139,7 +114,10 @@ def home():
         if title:
             generated_keywords = generate_keywords(title, description)
             return {"keywords": generated_keywords[:30]}  # Return JSON
-    return render_template("index.html", keywords=keywords)
+        if not title:
+            return jsonify({"error": "Title is required."}), 400
+        else:
+            return render_template("index.html", keywords=keywords)
 @app.route("/about_us")
 def about_us():
     return render_template("about_us.html")
@@ -162,7 +140,6 @@ def favicon():
 @app.route('/favicon.png')
 def favicon_png():
     return send_from_directory('static', 'favicon.png', mimetype='image/png')
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(port=port, host="0.0.0.0")

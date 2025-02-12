@@ -48,64 +48,8 @@
         </div>
         <p>&copy; 2025 All rights reserved.</p>
     </footer>
+
     <script>
-        function toggleMenu() {
-            let menu = document.getElementById("menu");
-            menu.classList.toggle("active");
-        }
-    
-        document.getElementById("title").addEventListener("input", function() {
-            let generateBtn = document.getElementById("generateBtn");
-            generateBtn.disabled = this.value.trim() === "";
-        });
-    
-        document.getElementById("keywordForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            const title = document.getElementById("title").value;
-            const description = document.getElementById("description").value;
-            const generateBtn = document.getElementById("generateBtn");
-            
-            generateBtn.disabled = true;
-            
-            fetch("/", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ title, description })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    return response.json().then(err => { throw new Error(err.error || "Server error") });
-                }
-                return response.json();
-            })
-            .then(data => {
-                const keywordContainer = document.getElementById("keywordContainer");
-                const generatedHeading = document.getElementById("generatedHeading");
-                const copyBtn = document.getElementById("copyBtn");
-    
-                keywordContainer.style.display = "block";
-                generatedHeading.style.display = "block";
-                copyBtn.style.display = "block";
-                
-                keywordContainer.innerHTML = data.keywords?.join(", ") || "No keywords generated";
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert(`Failed to fetch keywords: ${error.message}`);
-            })
-            .finally(() => {
-                generateBtn.disabled = false;
-            });
-        });
-    
-        document.getElementById("copyBtn").addEventListener("click", function() {
-            const text = document.getElementById("keywordContainer").innerText;
-            navigator.clipboard.writeText(text)
-                .then(() => alert("Keywords copied!"))
-                .catch(() => alert("Failed to copy keywords"));
-        });
-    </script>
-    <!-- <script>
         function toggleMenu() {
             let menu = document.getElementById("menu");
             menu.classList.toggle("active");
@@ -134,7 +78,7 @@
 // })
 // .then(response => {
 //     if (!response.ok) {
-//         throw new Error(`Server error: ${response.status}`);
+//         throw new Error(Server error: ${response.status});
 //     }
 //     return response.json();
 // })
@@ -153,41 +97,58 @@
 //     console.error("Error:", error);
 //     alert("Failed to fetch keywords. Please try again.");
 // });
+fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title: title, description: description })
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+    }
+    return response.json();
+})
+.then(data => {
+    // Display the keywords as before
+    let keywordContainer = document.getElementById("keywordContainer");
+    let generatedHeading = document.getElementById("generatedHeading");
+    let copyBtn = document.getElementById("copyBtn");
 
-            fetch("https://youtube-keywords-generator-3z4qtq0cm.vercel.app", {  // Use the full local URL
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ title: title, description: description })
-            })
-            .then(response => {
-            if (!response.ok) {
-                return response.json().then(err => { throw new Error(err.error) });
-                }
-                return response.json();
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert(`Error: ${error.message}`);
-            });
-            .then(response => response.json())
-            .then(data => {
-                let keywordContainer = document.getElementById("keywordContainer");
-                let generatedHeading = document.getElementById("generatedHeading");
-                let copyBtn = document.getElementById("copyBtn");
+    keywordContainer.style.display = "block";
+    generatedHeading.style.display = "block";
+    copyBtn.style.display = "block";
+    
+    keywordContainer.innerHTML = data.keywords.join(", ");
+})
+.catch(error => {
+    console.error("Error:", error);
+    alert("Failed to fetch keywords. Please try again.");
+});
 
-                keywordContainer.style.display = "block";
-                generatedHeading.style.display = "block";
-                copyBtn.style.display = "block";
+        //     fetch("/", {  // Use the full local URL
+        //         method: "POST",
+        //         headers: { "Content-Type": "application/json" },
+        //         body: JSON.stringify({ title: title, description: description })
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         let keywordContainer = document.getElementById("keywordContainer");
+        //         let generatedHeading = document.getElementById("generatedHeading");
+        //         let copyBtn = document.getElementById("copyBtn");
+
+        //         keywordContainer.style.display = "block";
+        //         generatedHeading.style.display = "block";
+        //         copyBtn.style.display = "block";
                 
-                keywordContainer.innerHTML = data.keywords.join(", ");
-            });
-        });
+        //         keywordContainer.innerHTML = data.keywords.join(", ");
+        //     });
+        // });
 
         document.getElementById("copyBtn").addEventListener("click", function() {
             let text = document.getElementById("keywordContainer").innerText;
             navigator.clipboard.writeText(text);
             alert("Keywords copied!");
         });
-    </script> -->
+    </script>
 </body>
 </html>
