@@ -9,8 +9,8 @@ from bs4 import BeautifulSoup
 from itertools import permutations
 import os
 from flask_cors import CORS
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 
 
