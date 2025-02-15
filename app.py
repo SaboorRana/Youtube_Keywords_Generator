@@ -8,13 +8,9 @@ from bs4 import BeautifulSoup
 from itertools import permutations
 import os
 from flask_cors import CORS
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
+# load_dotenv()
 
-# --- Issue 1: Environment and NLTK data ---
-# load_dotenv() is called, and you append a custom nltk_data path.
-# If the "nltk_data" folder is missing or incomplete (e.g. missing the tokenizer 'punkt'),
-# functions like word_tokenize() will raise a LookupError.
-load_dotenv()
 nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
 nltk.data.path.append(nltk_data_path)
 
