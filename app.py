@@ -1,3 +1,39 @@
+import os
+import shutil
+import nltk
+
+# Set the directory for nltk_data (adjust as needed)
+nltk_data_dir = os.path.join(os.path.dirname(__file__), 'nltk_data')
+
+def ensure_resource(resource_path, package_name):
+    """
+    Remove existing resource and download fresh copy.
+    resource_path: Path relative to nltk_data_dir (e.g., 'corpora/wordnet')
+    package_name: Package name to download (e.g., 'wordnet')
+    """
+    full_path = os.path.join(nltk_data_dir, resource_path)
+    if os.path.exists(full_path):
+        print(f"Removing existing {package_name} data at {full_path}")
+        shutil.rmtree(full_path)
+    print(f"Downloading {package_name}...")
+    nltk.download(package_name, download_dir=nltk_data_dir)
+    print(f"{package_name} downloaded.")
+
+# Ensure nltk_data_dir exists
+if not os.path.exists(nltk_data_dir):
+    os.makedirs(nltk_data_dir)
+
+# List of required resources with their relative paths and package names
+resources = [
+    ('tokenizers/punkt', 'punkt'),
+    ('corpora/stopwords', 'stopwords'),
+    ('corpora/wordnet', 'wordnet'),
+]
+
+for rel_path, pkg in resources:
+    ensure_resource(rel_path, pkg)
+
+
 from flask import Flask, render_template, request, jsonify, send_from_directory
 import yake
 import requests
@@ -129,4 +165,4 @@ def favicon_png():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(port=port, host="0.0.0.0", debug=True)
+    app.run(port=port, host="0.0.0.0")
