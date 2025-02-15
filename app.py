@@ -118,22 +118,48 @@ def generate_keywords(title, description=""):
 app = Flask(__name__)
 CORS(app)
 
+# @app.route("/", methods=["GET", "POST"])
+# def home():
+#     print("Received Request:", request.method)
+#     if request.method == "POST":
+#         data = request.get_json() or {}
+#         title = data.get("title", "").strip()
+#         description = data.get("description", "").strip()
+        
+#         if title:
+#             generated_keywords = generate_keywords(title, description)
+#             print("Generated Keywords:", generated_keywords[:30])
+#             return jsonify({"keywords": generated_keywords[:30]})
+#         else:
+#             print("⚠️ Missing title!")
+#             return jsonify({"error": "Title is required."}), 400
+#     return render_template("index.html")
 @app.route("/", methods=["GET", "POST"])
 def home():
     print("Received Request:", request.method)
     if request.method == "POST":
-        data = request.get_json() or {}
-        title = data.get("title", "").strip()
-        description = data.get("description", "").strip()
-        
-        if title:
+        try:
+            data = request.get_json() or {}
+            title = data.get("title", "").strip()
+            description = data.get("description", "").strip()
+            
+            if not title:
+                print("⚠️ Missing title!")
+                return jsonify({"error": "Title is required."}), 400
+            
             generated_keywords = generate_keywords(title, description)
             print("Generated Keywords:", generated_keywords[:30])
             return jsonify({"keywords": generated_keywords[:30]})
-        else:
-            print("⚠️ Missing title!")
-            return jsonify({"error": "Title is required."}), 400
-    return render_template("index.html")
+        except Exception as e:
+            import traceback
+            error_details = traceback.format_exc()
+            # Log the full error details to the server log:
+            print("❌ Error in POST request:")
+            print(error_details)
+            # Optionally, in debug mode, you can return the error message (not recommended in production)
+            return jsonify({"error": "Server error", "message": str(e)}), 500
+    else:
+        return render_template("index.html")
 
 @app.route("/about_us")
 def about_us():
