@@ -3,9 +3,9 @@ beautifulsoup4==4.10.0
 requests==2.26.0
 yake==0.4.8
 flask_cors==5.0.0
-python-dotenv
 gunicorn
 flask
+torch 
 
 
 
