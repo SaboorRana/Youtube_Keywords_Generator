@@ -63,50 +63,48 @@
             generateBtn.disabled = (this.value.trim() === "");
         });
 
-        // Handle the form submission with error handling
         document.getElementById("keywordForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            // Trim input values to remove extra whitespace
-            let title = document.getElementById("title").value.trim();
-            let description = document.getElementById("description").value.trim();
-            
-            // Check that title is provided (this should always be true because of the disabled button)
-            if (!title) {
-                alert("Please enter a title.");
-                return;
+        event.preventDefault();
+        let title = document.getElementById("title").value.trim();
+        let description = document.getElementById("description").value.trim();
+        
+        if (!title) {
+            alert("Please enter a title.");
+            return;
+        }
+        
+        fetch('/', {  
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title: title, description: description })
+        })
+        .then(response => {
+            if (!response.ok) {
+                // Log the response status to help debugging
+                console.error("Server returned status:", response.status);
+                throw new Error(`Server error: ${response.status}`);
             }
-            
-            fetch('/', {  
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ title: title, description: description })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Server error: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                let keywordContainer = document.getElementById("keywordContainer");
-                let generatedHeading = document.getElementById("generatedHeading");
-                let copyBtn = document.getElementById("copyBtn");
+            return response.json();
+        })
+        .then(data => {
+            let keywordContainer = document.getElementById("keywordContainer");
+            let generatedHeading = document.getElementById("generatedHeading");
+            let copyBtn = document.getElementById("copyBtn");
 
-                // Check if keywords were returned; if not, alert the user.
-                if (data.keywords && data.keywords.length > 0) {
-                    keywordContainer.style.display = "block";
-                    generatedHeading.style.display = "block";
-                    copyBtn.style.display = "block";
-                    keywordContainer.innerHTML = data.keywords.join(", ");
-                } else {
-                    alert("No keywords were generated. Please try a different title.");
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("Failed to fetch keywords. Please try again.");
-            });
+            if (data.keywords && data.keywords.length > 0) {
+                keywordContainer.style.display = "block";
+                generatedHeading.style.display = "block";
+                copyBtn.style.display = "block";
+                keywordContainer.innerHTML = data.keywords.join(", ");
+            } else {
+                alert("No keywords were generated. Please try a different title.");
+            }
+        })
+        .catch(error => {
+            console.error("Fetch error:", error);
+            alert("Failed to fetch keywords. Please try again.\n" + error.message);
         });
+    });
 
         // Copy the generated keywords to clipboard when the copy button is clicked
         document.getElementById("copyBtn").addEventListener("click", function() {
