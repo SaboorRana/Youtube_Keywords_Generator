@@ -8,9 +8,9 @@ from bs4 import BeautifulSoup
 from itertools import permutations
 import os
 from flask_cors import CORS
-# from dotenv import load_dotenv
-# load_dotenv()
+# Removed dotenv import and load_dotenv() since not needed in production
 
+# Append custom nltk_data path (if used)
 nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
 nltk.data.path.append(nltk_data_path)
 
@@ -20,8 +20,6 @@ def fetch_related_searches(query):
         url = f"https://www.google.com/search?q={query}"
         response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
         soup = BeautifulSoup(response.text, "html.parser")
-        # --- Issue 2: Reliance on Google markup ---
-        # If Google changes its HTML structure, this may return an empty list.
         suggestions = [s.text for s in soup.find_all("p") if len(s.text.split()) > 2][:10]
         return suggestions
     except Exception:
@@ -55,7 +53,6 @@ def refine_keywords(title_keywords, synonyms, general_keywords):
 def generate_keywords(title, description=""):
     """Generates structured, high-quality keywords"""
     stop_words = set(stopwords.words("english"))
-    # --- Issue 3: Missing tokenizer data (punkt) may cause LookupError here.
     title_tokens = [word.lower() for word in word_tokenize(title) if word.isalnum() and word.lower() not in stop_words]
 
     synonyms_map = {word: get_relevant_synonyms(word) for word in title_tokens}
@@ -82,8 +79,6 @@ def generate_keywords(title, description=""):
     structured_keywords = refine_keywords(title_keywords, synonym_keywords, general_keywords)[:30]
     return structured_keywords
 
-# --- Issue 4: Duplicate definitions ---
-# Make sure to create the Flask app only once.
 app = Flask(__name__)
 CORS(app)
 
@@ -102,7 +97,6 @@ def home():
         else:
             print("⚠️ Missing title!")
             return jsonify({"error": "Title is required."}), 400
-    # GET request returns the rendered template
     return render_template("index.html")
 
 @app.route("/about_us")
