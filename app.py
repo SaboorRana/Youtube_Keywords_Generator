@@ -10,33 +10,37 @@ import os
 from flask_cors import CORS
 import traceback
 
-# Use /tmp as the writable directory for NLTK data in Vercel
-writable_nltk_data = os.path.join('/tmp', 'nltk_data')
-os.makedirs(writable_nltk_data, exist_ok=True)
 
-# Explicitly set the NLTK_DATA environment variable
-os.environ['NLTK_DATA'] = writable_nltk_data
+nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
+nltk.data.path.insert(0, nltk_data_path)
+print("Using NLTK data directory:", nltk_data_path)
+# # Use /tmp as the writable directory for NLTK data in Vercel
+# writable_nltk_data = os.path.join('/tmp', 'nltk_data')
+# os.makedirs(writable_nltk_data, exist_ok=True)
 
-# Prepend the writable directory to the nltk data search path
-nltk.data.path = [writable_nltk_data] + nltk.data.path
+# # Explicitly set the NLTK_DATA environment variable
+# os.environ['NLTK_DATA'] = writable_nltk_data
 
-print("Using NLTK data directory:", writable_nltk_data)
+# # Prepend the writable directory to the nltk data search path
+# nltk.data.path = [writable_nltk_data] + nltk.data.path
 
-# Ensure required NLTK data is available
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt', download_dir=writable_nltk_data)
+# print("Using NLTK data directory:", writable_nltk_data)
 
-try:
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    nltk.download('stopwords', download_dir=writable_nltk_data)
+# # Ensure required NLTK data is available
+# try:
+#     nltk.data.find('tokenizers/punkt')
+# except LookupError:
+#     nltk.download('punkt', download_dir=writable_nltk_data)
 
-try:
-    nltk.data.find('corpora/wordnet')
-except LookupError:
-    nltk.download('wordnet', download_dir=writable_nltk_data)
+# try:
+#     nltk.data.find('corpora/stopwords')
+# except LookupError:
+#     nltk.download('stopwords', download_dir=writable_nltk_data)
+
+# try:
+#     nltk.data.find('corpora/wordnet')
+# except LookupError:
+#     nltk.download('wordnet', download_dir=writable_nltk_data)
 
 
 # # Optionally, if you prefer to use a custom nltk_data folder, you can still append its path:
