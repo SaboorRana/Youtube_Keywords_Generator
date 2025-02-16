@@ -10,42 +10,26 @@ import os
 from flask_cors import CORS
 import traceback
 
-
 nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
-nltk.data.path.insert(0, nltk_data_path)
-print("Using NLTK data directory:", nltk_data_path)
-# # Use /tmp as the writable directory for NLTK data in Vercel
-# writable_nltk_data = os.path.join('/tmp', 'nltk_data')
-# os.makedirs(writable_nltk_data, exist_ok=True)
+os.makedirs(nltk_data_path, exist_ok=True)
+nltk.data.path.append(nltk_data_path)
 
-# # Explicitly set the NLTK_DATA environment variable
-# os.environ['NLTK_DATA'] = writable_nltk_data
-
-# # Prepend the writable directory to the nltk data search path
-# nltk.data.path = [writable_nltk_data] + nltk.data.path
-
-# print("Using NLTK data directory:", writable_nltk_data)
-
-# # Ensure required NLTK data is available
-# try:
-#     nltk.data.find('tokenizers/punkt')
-# except LookupError:
-#     nltk.download('punkt', download_dir=writable_nltk_data)
-
-# try:
-#     nltk.data.find('corpora/stopwords')
-# except LookupError:
-#     nltk.download('stopwords', download_dir=writable_nltk_data)
-
-# try:
-#     nltk.data.find('corpora/wordnet')
-# except LookupError:
-#     nltk.download('wordnet', download_dir=writable_nltk_data)
-
-
-# # Optionally, if you prefer to use a custom nltk_data folder, you can still append its path:
+# Download missing NLTK data
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords', download_dir=nltk_data_path)
+try:
+    nltk.data.find('corpora/wordnet')
+except LookupError:
+    nltk.download('wordnet', download_dir=nltk_data_path)
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt', download_dir=nltk_data_path)
 # nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
-# nltk.data.path.append(nltk_data_path)
+# nltk.data.path.insert(0, nltk_data_path)
+# print("Using NLTK data directory:", nltk_data_path)
 
 def fetch_related_searches(query):
     """Fetches related search terms from Google/Bing"""
@@ -55,7 +39,8 @@ def fetch_related_searches(query):
         soup = BeautifulSoup(response.text, "html.parser")
         suggestions = [s.text for s in soup.find_all("p") if len(s.text.split()) > 2][:10]
         return suggestions
-    except Exception:
+    except Exception as e:
+        print(f"Scraping failed: {str(e)}")
         return []
 
 def get_relevant_synonyms(word):
@@ -169,7 +154,7 @@ def favicon_png():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(port=port, host="0.0.0.0", debug=True)
+    app.run(port=port, host="0.0.0.0")
 
 
 
