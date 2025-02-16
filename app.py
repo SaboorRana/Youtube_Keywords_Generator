@@ -10,13 +10,19 @@ import os
 from flask_cors import CORS
 import traceback
 
-# Use /tmp as the writable directory for NLTK data
+# Use /tmp as the writable directory for NLTK data in Vercel
 writable_nltk_data = os.path.join('/tmp', 'nltk_data')
 os.makedirs(writable_nltk_data, exist_ok=True)
-# Prepend this directory to the nltk data search path
-nltk.data.path.insert(0, writable_nltk_data)
 
-# Check and download required resources to the writable directory
+# Explicitly set the NLTK_DATA environment variable
+os.environ['NLTK_DATA'] = writable_nltk_data
+
+# Prepend the writable directory to the nltk data search path
+nltk.data.path = [writable_nltk_data] + nltk.data.path
+
+print("Using NLTK data directory:", writable_nltk_data)
+
+# Ensure required NLTK data is available
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
