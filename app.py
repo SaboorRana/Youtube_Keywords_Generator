@@ -9,12 +9,17 @@ from itertools import permutations
 import os
 from flask_cors import CORS
 import traceback
+from dotenv import load_dotenv
+load_dotenv()
+
+flask_env = os.getenv('FLASK_ENV')
+flask_debug = os.getenv('FLASK_DEBUG')
+port = os.getenv('PORT')
 
 nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
 os.makedirs(nltk_data_path, exist_ok=True)
 nltk.data.path.append(nltk_data_path)
 
-# Download missing NLTK data
 try:
     nltk.data.find('corpora/stopwords')
 except LookupError:
