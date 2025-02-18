@@ -9,6 +9,7 @@ from itertools import permutations
 import os
 from flask_cors import CORS
 import traceback
+nltk.download('punkt')
 
 nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
 os.makedirs(nltk_data_path, exist_ok=True)
