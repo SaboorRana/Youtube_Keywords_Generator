@@ -9,25 +9,38 @@ from itertools import permutations
 import os
 from flask_cors import CORS
 import traceback
+# nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
+# os.makedirs(nltk_data_path, exist_ok=True)
+# nltk.data.path.append(nltk_data_path)
 nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
 os.makedirs(nltk_data_path, exist_ok=True)
-nltk.data.path.append(nltk_data_path)
 
-try:
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    nltk.download('stopwords', download_dir=nltk_data_path)
-try:
-    nltk.data.find('corpora/wordnet')
-except LookupError:
-    nltk.download('wordnet', download_dir=nltk_data_path)
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt', download_dir=nltk_data_path)
-nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
+# Ensure that the data path is recognized by NLTK
 nltk.data.path.insert(0, nltk_data_path)
-print("Using NLTK data directory:", nltk_data_path)
+
+# Download necessary datasets explicitly
+nltk.download("stopwords", download_dir=nltk_data_path)
+nltk.download("wordnet", download_dir=nltk_data_path)
+nltk.download("punkt", download_dir=nltk_data_path)
+
+
+print("NLTK Data Paths:", nltk.data.path)
+
+# try:
+#     nltk.data.find('corpora/stopwords')
+# except LookupError:
+#     nltk.download('stopwords', download_dir=nltk_data_path)
+# try:
+#     nltk.data.find('corpora/wordnet')
+# except LookupError:
+#     nltk.download('wordnet', download_dir=nltk_data_path)
+# try:
+#     nltk.data.find('tokenizers/punkt')
+# except LookupError:
+#     nltk.download('punkt', download_dir=nltk_data_path)
+# nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
+# nltk.data.path.insert(0, nltk_data_path)
+# print("Using NLTK data directory:", nltk_data_path)
 
 def fetch_related_searches(query):
     """Fetches related search terms from Google/Bing"""
@@ -67,7 +80,7 @@ def refine_keywords(title_keywords, synonyms, general_keywords):
     return title_keywords + synonyms + general_keywords
 
 def generate_keywords(title, description=""):
-    """Generates structured, high-quality keywords"""
+    nltk.download("stopwords", quiet=True)
     stop_words = set(stopwords.words("english"))
     title_tokens = [word.lower() for word in word_tokenize(title) if word.isalnum() and word.lower() not in stop_words]
 
